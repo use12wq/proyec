@@ -1,0 +1,130 @@
+ .heart {
+      position: relative;
+      width: 100px;
+      height: 90px;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    .heart:before, .heart:after {
+      position: absolute;
+      content: "";
+      left: 50px;
+      top: 0;
+      width: 50px;
+      height: 80px;
+      background: #ff5e5e;
+      border-radius: 50px 50px 0 0;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart:after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25%, 75% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .flower {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle at 30% 30%, #fff 0%, #ffb6c1 60%, #ff69b4 100%);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(45deg);
+      opacity: 0;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .message-box {
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,236,240,0.9) 100%);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .message-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .btn-hug {
+      transition: all 0.3s ease;
+      background: linear-gradient(45deg, #ff758c, #ff7eb3);
+    }
+
+    .btn-hug:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+    }
+
+    .btn-hug:active {
+      transform: scale(0.98);
+    }
+
+    /* Brazos abrazando */
+    .arm {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: #ffb6c1;
+      border-radius: 50% 50% 0 0;
+      top: 50%;
+      z-index: 20;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.6s ease;
+    }
+
+    .arm-left {
+      left: -160px;
+      transform: rotate(-45deg) scale(0.8);
+    }
+
+    .arm-right {
+      right: -160px;
+      transform: rotate(45deg) scale(0.8);
+    }
+
+    .hugged .arm-left {
+      left: 20px;
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    .hugged .arm-right {
+      right: 20px;
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    .animate-shine {
+      animation: shine 3s infinite;
+    }
