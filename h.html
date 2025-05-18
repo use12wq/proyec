@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para la Mejor Mamá del Mundo</title>
+  <script src="https://cdn.tailwindcss.com"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    .heart {
+      position: relative;
+      width: 100px;
+      height: 90px;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    .heart:before, .heart:after {
+      position: absolute;
+      content: "";
+      left: 50px;
+      top: 0;
+      width: 50px;
+      height: 80px;
+      background: #ff5e5e;
+      border-radius: 50px 50px 0 0;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart:after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25%, 75% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .flower {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle at 30% 30%, #fff 0%, #ffb6c1 60%, #ff69b4 100%);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(45deg);
+      opacity: 0;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .message-box {
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,236,240,0.9) 100%);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .message-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .btn-hug {
+      transition: all 0.3s ease;
+      background: linear-gradient(45deg, #ff758c, #ff7eb3);
+    }
+
+    .btn-hug:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+    }
+
+    .btn-hug:active {
+      transform: scale(0.98);
+    }
+
+    /* Brazos abrazando */
+    .arm {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: #ffb6c1;
+      border-radius: 50% 50% 0 0;
+      top: 50%;
+      z-index: 20;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.6s ease;
+    }
+
+    .arm-left {
+      left: -160px;
+      transform: rotate(-45deg) scale(0.8);
+    }
+
+    .arm-right {
+      right: -160px;
+      transform: rotate(45deg) scale(0.8);
+    }
+
+    .hugged .arm-left {
+      left: 20px;
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    .hugged .arm-right {
+      right: 20px;
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    .animate-shine {
+      animation: shine 3s infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-pink-50 to-purple-100 flex items-center justify-center p-4 overflow-hidden">
+  <div class="relative w-full max-w-2xl">
+    <!-- Flores animadas -->
+    <div id="flowers-container"></div>
+
+    <!-- Brazos animados -->
+    <div class="arm arm-left hidden md:block"></div>
+    <div class="arm arm-right hidden md:block"></div>
+
+    <!-- Tarjeta principal -->
+    <div class="message-box rounded-2xl p-8 relative z-10 border-2 border-white overflow-hidden">
+      <!-- Corazón animado -->
+      <div class="heart mx-auto mb-6"></div>
+
+      <h1 class="text-4xl md:text-5xl font-bold text-center text-pink-600 mb-4 font-serif">¡Te Quiero Mamá!</h1>
+
+      <div class="text-lg text-gray-700 mb-8 text-center">
+        <p class="mb-4">En este día y siempre, quiero recordarte lo especial que eres para mí.</p>
+        <p class="mb-4">Eres mi guía, mi apoyo y mi mayor inspiración. Gracias por tu amor infinito.</p>
+        <p class="font-semibold text-pink-700">Eres simplemente la mejor mamá del mundo.</p>
+      </div>
+
+      <div class="flex justify-center">
+        <button id="hugBtn" class="btn-hug text-white px-6 py-3 rounded-full font-semibold flex items-center">
+          <i class="fas fa-hands-helping mr-2"></i> Envíame un abrazo
+        </button>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-pink-200 text-center">
+        <p class="text-sm text-gray-500">Con todo mi cariño,</p>
+        <p class="text-lg text-pink-600 font-medium">Tu negrito poporoii o como se escriba</p>
+      </div>
+
+      <!-- Efecto de brillo -->
+      <div class="absolute inset-0 overflow-hidden opacity-20">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent animate-shine"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Crear flores animadas
+    function createFlowers() {
+      const container = document.getElementById('flowers-container');
+      const colors = ['#ffb6c1', '#ff69b4', '#ffa07a', '#ff8c00', '#ff6347', '#ff1493'];
+
+      for (let i = 0; i < 15; i++) {
+        const flower = document.createElement('div');
+        flower.className = 'flower';
+        flower.style.left = `${Math.random() * 100}%`;
+        flower.style.bottom = '-30px';
+        const size = 20 + Math.random() * 30;
+        flower.style.width = `${size}px`;
+        flower.style.height = `${size}px`;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        flower.style.background = `radial-gradient(circle at 30% 30%, #fff 0%, ${color}60 60%, ${color} 100%)`;
+        flower.style.animationDelay = `${Math.random() * 15}s`;
+        container.appendChild(flower);
+      }
+    }
+
+    // Botón de abrazo
+    const hugBtn = document.getElementById('hugBtn');
+    const messageBox = document.querySelector('.message-box');
+    const leftArm = document.querySelector('.arm-left');
+    const rightArm = document.querySelector('.arm-right');
+
+    hugBtn.addEventListener('click', function () {
+      messageBox.classList.add('hugged');
+      leftArm.classList.remove('hidden');
+      rightArm.classList.remove('hidden');
+
+      // Corazones flotantes
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '<i class="fas fa-heart text-red-500"></i>';
+        heart.className = 'absolute text-2xl animate-bounce';
+        const xPos = 50 + (Math.random() * 20 - 10);
+        const yPos = 50 + (Math.random() * 20 - 10);
+        heart.style.left = `${xPos}%`;
+        heart.style.top = `${yPos}%`;
+        heart.style.animationDuration = `${1 + Math.random() * 2}s`;
+        heart.style.opacity = '0';
+        heart.style.transition = 'all 1s ease-out';
+        messageBox.appendChild(heart);
+        setTimeout(() => {
+          heart.style.opacity = '1';
+          heart.style.transform = `translateY(-${50 + Math.random() * 100}px) translateX(${Math.random() * 40 - 20}px)`;
+        }, 10);
+        setTimeout(() => {
+          heart.remove();
+        }, 2000);
+      }
+
+      // Texto y color temporal del botón
+      this.innerHTML = '<i class="fas fa-heart mr-2"></i> ¡Abrazo enviado!';
+      this.classList.add('bg-green-400');
+      this.classList.remove('bg-gradient-to-r');
+
+      // Restaurar
+      setTimeout(() => {
+        this.innerHTML = '<i class="fas fa-hands-helping mr-2"></i> Envíame un abrazo';
+        this.classList.remove('bg-green-400');
+        this.classList.add('bg-gradient-to-r');
+        messageBox.classList.remove('hugged');
+        leftArm.classList.add('hidden');
+        rightArm.classList.add('hidden');
+      }, 2500);
+    });
+
+    window.addEventListener('load', createFlowers);
+  </script>
+</body>
+</html>
